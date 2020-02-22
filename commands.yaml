@@ -1,0 +1,6 @@
+sourceBasePath: https://raw.githubusercontent.com/nithishravindra/gitlab/master/src
+commands:
+  dig:
+    sourcePath: /issue.js
+    description: List all issues.
+  
