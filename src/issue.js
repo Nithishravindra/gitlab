@@ -1,3 +1,4 @@
+// jshint esversion: 9
 
 /**
  * @description null
@@ -6,49 +7,49 @@
  * @param {!object} [secrets = {}] list of secrets
  * @return {Promise<SlackBodyType>} Response body
  */
+
+
+const requestEndpoint = `https://gitlab.com/api/v4/issues`;
 async function _command(params, commandText, secrets = {}) {
-  
-    const secretVal = secrets.privateToken
-    const requestEndpoint = `https://gitlab.com/api/v4/commands/api/v4/issues`;
-  
-  	
-  	if(!secretVal) {
-    	return {
-          response_type: 'ephemeral',
-          text:
-              'You need `gitlab access token`.'
-          };
+    const secretVal = secrets.privateToken;
+    if (!secretVal) {
+        return {
+            response_type: 'ephemeral',
+            text: 'You need `gitlab access token`.'
+        };
     }
-  
-  	const {varArgs, __client} = params;
-    try {  
+
+    try {
         const axios = require('axios');
-        await axios({
-            method: 'GET',
-            url: requestEndpoint,
-            headers: {
-              'PRIVATE-TOKEN': `PRIVATE-TOKEN ${secretVal}`
-            }
-          })
-      	  .then( res => {
-            	return res
-          })
+        const res = await axios.get(requestEndpoint,
+            {
+                'headers': { "Private-Token": "secretVal" }
+            });
+
+        const x = res.data[0].project_id;
+        const y = res.data[0].title;
+        const z = res.data[0].state;
+
+        return {
+            response_type: 'in_channel', // or `ephemeral` for private response
+            text: `${"project_id => " + x + " title => " + y + " state => " + z}`
+        };
     } catch (error) {
-      return {
-      		response_type: 'in_channel',
-     		text: error.message
-    	};
+        return {
+            response_type: 'in_channel',
+            text: error.message
+        };
     }
 }
 
 /**
- * @typedef {object} SlackBodyType
- * @property {string} text
- * @property {'in_channel'|'ephemeral'} [response_type]
- */
+* @typedef {object} SlackBodyType
+* @property {string} text
+* @property {'in_channel'|'ephemeral'} [response_type]
+*/
 
-const main = async ({__secrets = {}, commandText, ...params}) => ({
-  body: await _command(params, commandText, __secrets)
+const main = async ({ __secrets = {}, commandText, ...params }) => ({
+    body: await _command(params, commandText, __secrets)
 });
 
 module.exports = main;
