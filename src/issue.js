@@ -23,7 +23,7 @@ async function _command(params, commandText, secrets = {}) {
         const axios = require('axios');
         const res = await axios.get(requestEndpoint,
             {
-                'headers': { "Private-Token": "secretVal" }
+                'headers': { "Private-Token": "hg54f57uf-Y_EWcG23Y-" }
             });
 
         const x = res.data[0].project_id;
