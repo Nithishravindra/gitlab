@@ -5,7 +5,7 @@ A nimbella commander that gives details of 'issues' in gitlab.
 ## Install 
 
 ```
-/nc csm_install github:nithishravindra/gitlab
+/nc csm_install github:Nithishravindra/gitlab_nimbella
 ```
 
 ## Usuage
