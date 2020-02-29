@@ -25,14 +25,20 @@ async function _command(params, commandText, secrets = {}) {
             {
                 'headers': { "Private-Token": secretVal }
             });
-
-        const x = res.data[0].project_id;
-        const y = res.data[0].title;
-        const z = res.data[0].state;
+        let output = {};
+        if (res.status === 200) {
+            output = res.data
+                .filter(function (item) {
+                    if (item.state === 'opened') return item.id;
+                })
+                .map(function (item) {
+                    return "id: " + item.id + " title: " + item.title + " description: " + item.description + " authorname: " + item.author.username;
+                });
+        }
 
         return {
             response_type: 'in_channel', // or `ephemeral` for private response
-            text: `${"project_id => " + x + " title => " + y + " state => " + z}`
+            text: `${output}`
         };
     } catch (error) {
         return {
