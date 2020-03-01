@@ -1,6 +1,6 @@
 ## Issue - gitlab
 
-A nimbella commander that gives details of 'issues' in gitlab. 
+A nimbella commander that gives 'id', 'title', 'description' and 'author' of project if the 'issue' is under 'opened' state in gitlab. 
 
 ## Install 
 
