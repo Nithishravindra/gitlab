@@ -10,7 +10,7 @@ A nimbella commander that gives 'id', 'title', 'description' and 'author' of pro
 
 ## Usuage
 
-Grab an 'Personal Access Token' from [Gitlab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), then by using '/nc secret_create' add 'privateToken' in 'Name' and 'Personal Access Token' in 'Value'.
+Grab 'Personal Access Token' from [Gitlab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html), then by using '/nc secret_create' add 'privateToken' in 'Name' and 'Personal Access Token' in 'Value'.
 
 Run the following command to get issue details of project.
 ```
